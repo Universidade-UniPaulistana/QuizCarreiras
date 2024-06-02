@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Vocacional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h1 {
+            color: #cc0000;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .submit-button {
+            background-color: #cc0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-button:hover {
+            background-color: #990000;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 100px;
+            height: auto;
+        }
+        .image-option img {
+            width: 80px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fff; /* Fundo mais claro */
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+            color: #333; /* Texto escuro para contraste */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100px); }
+            to { transform: translateY(0); }
+        }
+        .result-message {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #cc0000;
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .uni-call {
+            color: #cc0000;
+            font-size: 1.2em;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .link-faculdade {
+            color: #cc0000;
+            text-decoration: none;
+        }
+        .link-faculdade:hover {
+            text-decoration: underline; /* Sublinha o link ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo da Escola" class="logo">
+        <h1>Quiz Vocacional</h1>
+        <form id="quizForm">
+            <!-- Perguntas -->
+            <div class="question">
+                <p>1. Você gosta de trabalhar com pessoas e ajudar a resolver seus problemas?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="psicologia"> Sim</label>
+                    <label><input type="radio" name="q1" value="administracao"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. Você se interessa por ensinar e compartilhar conhecimento?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="pedagogia"> Sim</label>
+                    <label><input type="radio" name="q2" value="logistica"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. Você é bom em organizar e gerenciar recursos?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="logistica"> Sim</label>
+                    <label><input type="radio" name="q3" value="contabilidade"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>4. Você gosta de trabalhar com números e finanças?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="contabilidade"> Sim</label>
+                    <label><input type="radio" name="q4" value="psicologia"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>5. Você se sente confortável lidando com questões de recursos humanos?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="rh"> Sim</label>
+                    <label><input type="radio" name="q5" value="pedagogia"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>6. Você tem habilidades de liderança e gosta de gerenciar equipes?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="administracao"> Sim</label>
+                    <label><input type="radio" name="q6" value="rh"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>7. Você se interessa por finanças e investimentos?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="administracao"> Sim</label>
+                    <label><input type="radio" name="q7" value="financas"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>8. Você gosta de otimizar processos e melhorar a eficiência?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="administracao"> Sim</label>
+                    <label><input type="radio" name="q8" value="logistica"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>9. Você se sente confortável com análises financeiras e contabilidade?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="financas"> Sim</label>
+                    <label><input type="radio" name="q9" value="contabilidade"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>10. Você gosta de trabalhar em equipe e tem boas habilidades interpessoais?</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="rh"> Sim</label>
+                    <label><input type="radio" name="q10" value="psicologia"> Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>11. Com qual destas imagens você mais se identifica?</p>
+                <div class="options image-option">
+                    <label><input type="radio" name="q11" value="imagem1"><img src="imagem1.jpg" alt="Imagem 1"></label>
+                    <label><input type="radio" name="q11" value="imagem2"><img src="imagem2.jpg" alt="Imagem 2"></label>
+                    <label><input type="radio" name="q11" value="imagem3"><img src="imagem3.jpg" alt="Imagem 3"></label>
+                    <label><input type="radio" name="q11" value="imagem4"><img src="imagem4.jpg" alt="Imagem 4"></label>
+                    <label><input type="radio" name="q11" value="imagem5"><img src="imagem5.jpg" alt="Imagem 5"></label>
+                </div>
+            </div>
+            <button type="button" class="submit-button" onclick="calculateResult()">Enviar</button>
+        </form>
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p class="result-message" id="result"></p>
+            <p class="uni-call">Venha para UniPaulistana! Onde moldaremos seu futuro! <br>
+            <a href="https://www.unipaulistana.edu.br" class="link-faculdade" target="_blank"><u>Visite nosso site</u></a></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('quizForm');
+            const formData = new FormData(form);
+            const counts = {
+                psicologia: 0,
+                pedagogia: 0,
+                logistica: 0,
+                contabilidade: 0,
+                rh: 0,
+                administracao: 0,
+                financas: 0
+            };
+
+            // Contabiliza as respostas
+            formData.forEach((value, key) => {
+                if (key !== 'q11') { // Exclui a pergunta de imagens do cálculo
+                    counts[value]++;
+                }
+            });
+
+            let result = '';
+            let maxCount = 0;
+
+            // Determina o curso com a maior contagem
+            for (const [key, value] of Object.entries(counts)) {
+                if (value > maxCount) {
+                    maxCount = value;
+                    result = key;
+                }
+            }
+
+            // Mensagens de resultado para cada curso
+            const resultMessage = {
+                psicologia: "Você tem aptidão para Psicologia.",
+                pedagogia: "Você tem aptidão para Pedagogia.",
+                logistica: "Você tem aptidão para Logística.",
+                contabilidade: "Você tem aptidão para Contabilidade.",
+                rh: "Você tem aptidão para Recursos Humanos.",
+                administracao: "Você tem aptidão para Administração.",
+                financas: "Você tem aptidão para Finanças."
+            };
+
+            document.getElementById('result').textContent = resultMessage[result];
+            document.getElementById('resultModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('resultModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
